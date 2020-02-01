@@ -33,13 +33,13 @@
     <div class="card my-4 mx-auto">
       <div class="card-body m-2 m-md-4">
         <div class="row">
-          <div class="col-5"><img src="../static/pict 1.png" class="img-fluid" alt=""></div>
+          {% set teacher = profiles.teachers[id]%}
+          <div class="col-5"><img src="{{ teacher.picture }}" class="img-fluid" alt=""></div>
           <div class="col-7">
-            <h1 class="h2">Morris Simmmons</h1>
-            <p><span class="badge badge-secondary mr-2">Для путешествий </span>Рейтинг: 4.8 Ставка: 1200 / час</p>
-            <p>Native English language teacherHi Everyone! My name is Richard; I am a native English speaker. I was born in South Africa, Spent 12 years living in the UK and am now living in Spain. I have a degree in food science, a TEFL certificate and a level 3 in training and education. I worked in cheese manufacturing for many years and have good knowledge of dairy production and food safety topics.
+            <h1 class="h2">{{ teacher.name }}</h1>
+            <p><span class="badge badge-secondary mr-2">Для путешествий </span>Рейтинг: {{ teacher.rating }} Ставка: {{ teacher.price }} / час</p>
+            <p>{{ teacher.about }}</p>
             <br> <br>
-
           </div>
         </div>
       </div>
@@ -58,54 +58,100 @@
           </tr>
           <tr>
             <td><span class="btn">8:00</span></td>
-            <td><a href="booking.html" class="btn btn-sm btn-secondary">8:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">8:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">8:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">8:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">8:00</a></td>
-            <td>-</td>
-            <td>-</td>
+            {% for k,v in teacher.free.items() %}
+              {% for kk,vv in v.items() %}
+                {% if kk == "8:00" and vv == True%}
+                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">8:00</a></td>
+                {% elif kk == "8:00" and vv == False %}
+                <td><a href="#" class="btn btn-sm btn-secondary">8:00</a></td>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
           </tr>
           <tr>
             <td><span class="btn">10:00</span></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">10:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">10:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">10:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">10:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">10:00</a></td>
-            <td>-</td>
-            <td>-</td>
+            {% for k,v in teacher.free.items() %}
+              {% for kk,vv in v.items() %}
+                {% if kk == "10:00" and vv == True %}
+                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">10:00</a></td>
+                {% elif kk == "10:00" and vv == False %}
+                  <td><a href="#" class="btn btn-sm btn-secondary">10:00</a></td>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
           </tr>
           <tr>
             <td><span class="btn">12:00</span></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">12:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">12:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">12:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">12:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">12:00</a></td>
-            <td>-</td>
-            <td>-</td>
+            {% for k,v in teacher.free.items() %}
+              {% for kk,vv in v.items() %}
+                {% if kk == "12:00" and vv == True %}
+                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">12:00</a></td>
+                {% elif kk == "12:00" and vv == False %}
+                  <td><a href="#" class="btn btn-sm btn-secondary">12:00</a></td>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
           </tr>
           <tr>
             <td><span class="btn">14:00</span></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">14:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">14:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">14:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">14:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">14:00</a></td>
-            <td>-</td>
-            <td>-</td>
+            {% for k,v in teacher.free.items() %}
+              {% for kk,vv in v.items() %}
+                {% if kk == "14:00" and vv == True %}
+                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">14:00</a></td>
+                {% elif kk == "14:00" and vv == False %}
+                  <td><a href="#" class="btn btn-sm btn-secondary">14:00</a></td>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
           </tr>
           <tr>
             <td><span class="btn">16:00</span></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">16:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">16:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">16:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-success">16:00</a></td>
-            <td><a href="#" class="btn btn-sm btn-secondary">16:00</a></td>
-            <td>-</td>
-            <td>-</td>
+            {% for k,v in teacher.free.items() %}
+              {% for kk,vv in v.items() %}
+                {% if kk == "16:00" and vv == True %}
+                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">16:00</a></td>
+                {% elif kk == "16:00" and vv == False %}
+                  <td><a href="#" class="btn btn-sm btn-secondary">16:00</a></td>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
           </tr>
+          <tr>
+            <td><span class="btn">18:00</span></td>
+            {% for k,v in teacher.free.items() %}
+              {% for kk,vv in v.items() %}
+                {% if kk == "18:00" and vv == True %}
+                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">18:00</a></td>
+                {% elif kk == "18:00" and vv == False %}
+                  <td><a href="#" class="btn btn-sm btn-secondary">18:00</a></td>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </tr>
+          <tr>
+              <td><span class="btn">20:00</span></td>
+              {% for k,v in teacher.free.items() %}
+                {% for kk,vv in v.items() %}
+                  {% if kk == "20:00" and vv == True %}
+                    <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">20:00</a></td>
+                  {% elif kk == "20:00" and vv == False %}
+                    <td><a href="#" class="btn btn-sm btn-secondary">20:00</a></td>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </tr>
+            <tr>
+              <td><span class="btn">22:00</span></td>
+              {% for k,v in teacher.free.items() %}
+                {% for kk,vv in v.items() %}
+                  {% if kk == "22:00" and vv == True %}
+                    <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">22:00</a></td>
+                  {% elif kk == "22:00" and vv == False %}
+                    <td><a href="#" class="btn btn-sm btn-secondary">22:00</a></td>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </tr>
         </table>
       </div>
     </div>

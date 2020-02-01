@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 from flask import request
 
+import json
+
 
 app = Flask(__name__)
 
@@ -13,9 +15,11 @@ def main():
 def goal(goal):
     return render_template("goal.html")
 
-@app.route("/profiles/<id>/")
+@app.route("/profiles/<int:id>/")
 def profile(id):
-    return render_template("profile.html")
+    with open('teachers.json') as json_file:
+        profiles = json.load(json_file)
+    return render_template("profile.html", id=id, profiles=profiles)
 
 @app.route("/request/")
 def request():
@@ -27,7 +31,7 @@ def request_done():
 
 @app.route("/booking/<id>")
 def booking(id):
-    return render_template("booking.html")
+    return render_template("booking.html", id=id)
 
 @app.route("/booking_done/")
 def booking_done():
