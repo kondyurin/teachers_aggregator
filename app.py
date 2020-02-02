@@ -22,7 +22,7 @@ def profile(id):
     return render_template("profile.html", id=id, profiles=profiles)
 
 @app.route("/request/")
-def request():
+def request_select():
     return render_template("request.html")
 
 @app.route("/request_done/")
@@ -35,11 +35,12 @@ def booking(id, day, hour):
         profiles = json.load(json_file)
     return render_template("booking.html", id=id, day=day, hour=hour, profiles=profiles)
 
-@app.route("/booking_done/", methods=['POST'])
+@app.route("/booking_done/", methods=['GET','POST'])
 def booking_done():
-    name = request.form.get('name')
-    name = request.form.get('name')
-    return render_template("booking_done.html")
+    if request.method == 'POST':
+        name = request.form['n']
+        tel = request.form['t']
+        return render_template("booking_done.html",name=name, tel=tel)
 
 
 if __name__ == "__main__":
