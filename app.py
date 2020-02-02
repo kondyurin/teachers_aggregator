@@ -38,9 +38,15 @@ def booking(id, day, hour):
 @app.route("/booking_done/", methods=['GET','POST'])
 def booking_done():
     if request.method == 'POST':
-        name = request.form['n']
-        tel = request.form['t']
-        return render_template("booking_done.html",name=name, tel=tel)
+        teacher_id = request.form.get('clientTeacher')
+        name = request.form.get('clientName')
+        phone = request.form.get('clientPhone')
+        day = request.form.get('clientWeekday')
+        hour = request.form.get('clientTime')
+        booking_data = {'id': teacher_id, 'name':name, 'phone': phone, 'day': day, 'hour': hour}
+        with open('booking.json', 'w') as f:
+            booking_data_json = json.dump(booking_data, f)
+        return render_template("booking_done.html", booking_data=booking_data)
 
 
 if __name__ == "__main__":
