@@ -29,12 +29,16 @@ def request():
 def request_done():
     return render_template("request_done.html")
 
-@app.route("/booking/<id>")
-def booking(id):
-    return render_template("booking.html", id=id)
+@app.route("/booking/<int:id>/<day>/<hour>/")
+def booking(id, day, hour):
+    with open('teachers.json') as json_file:
+        profiles = json.load(json_file)
+    return render_template("booking.html", id=id, day=day, hour=hour, profiles=profiles)
 
-@app.route("/booking_done/")
+@app.route("/booking_done/", methods=['POST'])
 def booking_done():
+    name = request.form.get('name')
+    name = request.form.get('name')
     return render_template("booking_done.html")
 
 

@@ -60,8 +60,8 @@
             <td><span class="btn">8:00</span></td>
             {% for k,v in teacher.free.items() %}
               {% for kk,vv in v.items() %}
-                {% if kk == "8:00" and vv == True%}
-                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">8:00</a></td>
+                {% if kk == "8:00" and vv == True %}
+                  <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">8:00</a></td>
                 {% elif kk == "8:00" and vv == False %}
                 <td><a href="#" class="btn btn-sm btn-secondary">8:00</a></td>
                 {% endif %}
@@ -73,7 +73,7 @@
             {% for k,v in teacher.free.items() %}
               {% for kk,vv in v.items() %}
                 {% if kk == "10:00" and vv == True %}
-                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">10:00</a></td>
+                  <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">10:00</a></td>
                 {% elif kk == "10:00" and vv == False %}
                   <td><a href="#" class="btn btn-sm btn-secondary">10:00</a></td>
                 {% endif %}
@@ -85,7 +85,7 @@
             {% for k,v in teacher.free.items() %}
               {% for kk,vv in v.items() %}
                 {% if kk == "12:00" and vv == True %}
-                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">12:00</a></td>
+                  <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">12:00</a></td>
                 {% elif kk == "12:00" and vv == False %}
                   <td><a href="#" class="btn btn-sm btn-secondary">12:00</a></td>
                 {% endif %}
@@ -97,7 +97,7 @@
             {% for k,v in teacher.free.items() %}
               {% for kk,vv in v.items() %}
                 {% if kk == "14:00" and vv == True %}
-                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">14:00</a></td>
+                  <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">14:00</a></td>
                 {% elif kk == "14:00" and vv == False %}
                   <td><a href="#" class="btn btn-sm btn-secondary">14:00</a></td>
                 {% endif %}
@@ -109,7 +109,7 @@
             {% for k,v in teacher.free.items() %}
               {% for kk,vv in v.items() %}
                 {% if kk == "16:00" and vv == True %}
-                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">16:00</a></td>
+                  <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">16:00</a></td>
                 {% elif kk == "16:00" and vv == False %}
                   <td><a href="#" class="btn btn-sm btn-secondary">16:00</a></td>
                 {% endif %}
@@ -121,7 +121,7 @@
             {% for k,v in teacher.free.items() %}
               {% for kk,vv in v.items() %}
                 {% if kk == "18:00" and vv == True %}
-                  <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">18:00</a></td>
+                  <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">18:00</a></td>
                 {% elif kk == "18:00" and vv == False %}
                   <td><a href="#" class="btn btn-sm btn-secondary">18:00</a></td>
                 {% endif %}
@@ -133,7 +133,7 @@
               {% for k,v in teacher.free.items() %}
                 {% for kk,vv in v.items() %}
                   {% if kk == "20:00" and vv == True %}
-                    <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">20:00</a></td>
+                    <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">20:00</a></td>
                   {% elif kk == "20:00" and vv == False %}
                     <td><a href="#" class="btn btn-sm btn-secondary">20:00</a></td>
                   {% endif %}
@@ -145,7 +145,7 @@
               {% for k,v in teacher.free.items() %}
                 {% for kk,vv in v.items() %}
                   {% if kk == "22:00" and vv == True %}
-                    <td><a href="/booking/{{ id }}/" class="btn btn-sm btn-success">22:00</a></td>
+                    <td><a href="/booking/{{ id }}/{{ k }}/{{ kk | replace(':00','') }}/" class="btn btn-sm btn-success">22:00</a></td>
                   {% elif kk == "22:00" and vv == False %}
                     <td><a href="#" class="btn btn-sm btn-secondary">22:00</a></td>
                   {% endif %}
