@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask import request
 
 import json
+import random
 
 from data import goals
 
@@ -11,7 +12,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return render_template("index.html")
+    with open('teachers.json') as json_file:
+        profiles = json.load(json_file)
+    random_profiles = random.sample(list(range(len(profiles['teachers']))), 6)
+    return render_template("index.html", profiles=profiles, random_profiles=random_profiles)
 
 @app.route("/goals/<goal>/")
 def get_goal(goal):
