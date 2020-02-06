@@ -3,6 +3,8 @@ from flask import request
 
 import json
 
+from data import goals
+
 
 app = Flask(__name__)
 
@@ -23,17 +25,23 @@ def profile(id):
 
 @app.route("/request/")
 def request_select():
-    return render_template("request.html")
+    return render_template("request.html", goals=goals)
 
 @app.route("/request_done/", methods=['GET', 'POST'])
 def request_done():
     if request.method == 'POST':
         request_name = request.form.get('clientNameRequest')
         request_phone = request.form.get('clientPhoneRequest')
-        request_data = {'name': request_name, 'phone':request_phone}
+        goal = request.form.get('goal')
+        time = request.form.get('time')
+        request_data = {'name': request_name, 
+                        'phone':request_phone,
+                        'goal': goal,
+                        'time': time
+                        }
         with open('request.json', 'w') as f:
             request_data_json = json.dump(request_data, f)
-    return render_template("request_done.html", request_data=request_data)
+        return render_template("request_done.html", request_data=request_data)
 
 @app.route("/booking/<int:id>/<day>/<hour>/")
 def booking(id, day, hour):
