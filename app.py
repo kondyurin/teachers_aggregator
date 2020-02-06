@@ -25,9 +25,15 @@ def profile(id):
 def request_select():
     return render_template("request.html")
 
-@app.route("/request_done/")
+@app.route("/request_done/", methods=['GET', 'POST'])
 def request_done():
-    return render_template("request_done.html")
+    if request.method == 'POST':
+        request_name = request.form.get('clientNameRequest')
+        request_phone = request.form.get('clientPhoneRequest')
+        request_data = {'name': request_name, 'phone':request_phone}
+        with open('request.json', 'w') as f:
+            request_data_json = json.dump(request_data, f)
+    return render_template("request_done.html", request_data=request_data)
 
 @app.route("/booking/<int:id>/<day>/<hour>/")
 def booking(id, day, hour):
