@@ -14,8 +14,11 @@ def main():
     return render_template("index.html")
 
 @app.route("/goals/<goal>/")
-def goal(goal):
-    return render_template("goal.html")
+def get_goal(goal):
+    current_goal = goals[goal]
+    with open('teachers.json') as json_file:
+        profiles = json.load(json_file)
+    return render_template("goal.html", goals=goals, goal=goal, current_goal=current_goal, profiles=profiles)
 
 @app.route("/profiles/<int:id>/")
 def profile(id):
