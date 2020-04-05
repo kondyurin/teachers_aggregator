@@ -9,25 +9,26 @@ from data import goals
 
 app = Flask(__name__)
 
+def get_teachers_profiles():
+    with open('teachers.json') as json_file:
+        profiles = json.load(json_file)
+    return profiles
 
 @app.route("/")
 def main():
-    with open('teachers.json') as json_file:
-        profiles = json.load(json_file)
+    profiles = get_teachers_profiles()
     random_profiles = random.sample(list(range(len(profiles['teachers']))), 6)
     return render_template("index.html", profiles=profiles, random_profiles=random_profiles)
 
 @app.route("/goals/<goal>/")
 def get_goal(goal):
     current_goal = goals[goal]
-    with open('teachers.json') as json_file:
-        profiles = json.load(json_file)
+    profiles = get_teachers_profiles()
     return render_template("goal.html", goals=goals, goal=goal, current_goal=current_goal, profiles=profiles)
 
 @app.route("/profiles/<int:id>/")
 def profile(id):
-    with open('teachers.json') as json_file:
-        profiles = json.load(json_file)
+    profiles = get_teachers_profiles()
     return render_template("profile.html", id=id, profiles=profiles)
 
 @app.route("/request/")
@@ -52,8 +53,7 @@ def request_done():
 
 @app.route("/booking/<int:id>/<day>/<hour>/")
 def booking(id, day, hour):
-    with open('teachers.json') as json_file:
-        profiles = json.load(json_file)
+    profiles = get_teachers_profiles()
     return render_template("booking.html", id=id, day=day, hour=hour, profiles=profiles)
 
 @app.route("/booking_done/", methods=['GET','POST'])
