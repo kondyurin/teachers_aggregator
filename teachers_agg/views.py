@@ -4,11 +4,11 @@ from flask import render_template, request
 import json
 import random
 
-from data import goals
+from .data import goals
 
 
 def get_teachers_profiles():
-    with open('teachers.json') as json_file:
+    with open('teachers_agg/teachers.json') as json_file:
         profiles = json.load(json_file)
     return profiles
 
