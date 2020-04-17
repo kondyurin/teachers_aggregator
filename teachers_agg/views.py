@@ -1,17 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, render_template, request
-from flask_migrate import Migrate
+from teachers_agg import app
+from flask import render_template, request
 
 import json
 import random
 
 from data import goals
-from models import teachers_goals, Teacher, Booking, Goal, Request
-
-
-app = Flask(__name__)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 
 def get_teachers_profiles():
@@ -74,7 +67,3 @@ def booking_done():
         with open('booking.json', 'w') as f:
             booking_data_json = json.dump(booking_data, f)
         return render_template("booking_done.html", booking_data=booking_data)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
