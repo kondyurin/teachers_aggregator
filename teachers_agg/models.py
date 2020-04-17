@@ -1,7 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
+from teachers_agg import db
 
-
-db = SQLAlchemy()
 
 teachers_goals = db.Table('teachers_goals',
                           db.Column(db.Integer, db.ForeignKey('teachers.id')),
@@ -27,6 +25,8 @@ class Booking(db.Model):
     __tablename__ = 'bookings'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    phone = db.Column(db.String, nullable=False)
     teacher = db.relationship('Teacher', back_populates='booking')
     teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
 
@@ -45,5 +45,5 @@ class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     goal = db.Column(db.String, nullable=False)
-    phone = db.Column(db.String, nullable=False, unique=True)
+    phone = db.Column(db.String, nullable=False)
     time = db.Column(db.String, nullable=False)
