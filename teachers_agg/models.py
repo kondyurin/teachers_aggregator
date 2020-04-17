@@ -2,8 +2,8 @@ from teachers_agg import db
 
 
 teachers_goals = db.Table('teachers_goals',
-                          db.Column(db.Integer, db.ForeignKey('teachers.id')),
-                          db.Column(db.Integer, db.ForeignKey('goals.id'))
+                          db.Column('teacher_id', db.Integer, db.ForeignKey('teachers.id')),
+                          db.Column('goal_id', db.Integer, db.ForeignKey('goals.id'))
                           )
 
 
