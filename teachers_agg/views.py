@@ -1,22 +1,18 @@
-from teachers_agg import app
-from flask import render_template, request
-
 import json
 import random
 
+from flask import render_template, request
+from sqlalchemy.sql.expression import func
+
 from .data import goals
+from teachers_agg import app, db
+from teachers_agg.models import Teacher, Booking
 
-
-def get_teachers_profiles():
-    with open('teachers_agg/teachers.json') as json_file:
-        profiles = json.load(json_file)
-    return profiles
 
 @app.route("/")
 def main():
-    profiles = get_teachers_profiles()
-    random_profiles = random.sample(list(range(len(profiles['teachers']))), 6)
-    return render_template("index.html", profiles=profiles, random_profiles=random_profiles)
+    random_profiles = Teacher.query.order_by(func.random()).limit(6).all()
+    return render_template("index.html", random_profiles=random_profiles)
 
 @app.route("/goals/<goal>/")
 def get_goal(goal):
@@ -26,8 +22,8 @@ def get_goal(goal):
 
 @app.route("/profiles/<int:id>/")
 def profile(id):
-    profiles = get_teachers_profiles()
-    teacher = profiles['teachers'][id]
+    # profiles = get_teachers_profiles()
+    # teacher = profiles['teachers'][id]
     return render_template("profile.html", id=id, profiles=profiles, teacher=teacher)
 
 @app.route("/request/")
