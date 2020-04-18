@@ -20,11 +20,11 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
-
 from teachers_agg import views, models
 from teachers_agg.models import Teacher
 
-engine = create_engine(db_path)
+
+# engine = create_engine(db_path)
 
 def add_teachers_to_db():
     """
@@ -46,12 +46,12 @@ def add_teachers_to_db():
     except IntegrityError:
         db.session.rollback()
 
+add_teachers_to_db()
 
 # def is_db_empty():
 #     table_names = reflection.Inspector.from_engine(engine).get_table_names()
 #     print(table_names)
 #     is_empty = table_names == []
 #     is_empty = engine.has_table('Teacher')
-
 
 # is_db_empty()
