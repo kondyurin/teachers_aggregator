@@ -48,8 +48,8 @@ def request_done():
 
 @app.route("/booking/<int:id>/<day>/<hour>/")
 def booking(id, day, hour):
-    profiles = get_teachers_profiles()
-    return render_template("booking.html", id=id, day=day, hour=hour, profiles=profiles)
+    profile = Teacher.query.get_or_404(id)
+    return render_template("booking.html", id=id, day=day, hour=hour, profile=profile)
 
 @app.route("/booking_done/", methods=['GET','POST'])
 def booking_done():
