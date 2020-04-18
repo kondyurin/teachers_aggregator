@@ -39,7 +39,7 @@ def add_teachers_to_db():
                           rating=item['rating'],
                           picture_src=item['picture'],
                           price=item['price'],
-                          free=str(item['free']))
+                          free=json.dumps(item['free']))
         db.session.add(teacher)
     try:
         db.session.commit()
