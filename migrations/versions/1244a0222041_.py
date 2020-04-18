@@ -5,6 +5,8 @@ Revises:
 Create Date: 2020-04-17 13:54:09.201948
 
 """
+# import json
+
 from alembic import op
 import sqlalchemy as sa
 
@@ -21,6 +23,7 @@ def upgrade():
     op.create_table('goals',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('goal', sa.String(), nullable=False),
+    sa.Column('value', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('requests',
@@ -46,6 +49,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('phone', sa.String(), nullable=False),
+    sa.Column('day', sa.String(), nullable=False),
+    sa.Column('hour', sa.Integer(), nullable=False),
     sa.Column('teacher_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['teacher_id'], ['teachers.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -57,6 +62,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['teacher_id'], ['teachers.id'], )
     )
     # ### end Alembic commands ###
+
+    # with open('teachers_agg/teachers.json') as json_file:
+        # profiles = json.load(json_file)
+    # op.execute("""INSERT INTO teachers VALUES ()""", [{}])
 
 
 def downgrade():
