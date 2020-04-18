@@ -22,9 +22,9 @@ def get_goal(goal):
 
 @app.route("/profiles/<int:id>/")
 def profile(id):
-    # profiles = get_teachers_profiles()
-    # teacher = profiles['teachers'][id]
-    return render_template("profile.html", id=id, profiles=profiles, teacher=teacher)
+    teacher = Teacher.query.get_or_404(id)
+    teacher_free = json.loads(teacher.free)
+    return render_template("profile.html", id=id, teacher=teacher, teacher_free=teacher_free)
 
 @app.route("/request/")
 def request_select():
