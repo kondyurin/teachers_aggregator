@@ -27,6 +27,8 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     phone = db.Column(db.String, nullable=False)
+    day = db.Column(db.String, nullable=False)
+    hour = db.Column(db.Integer, nullable=False)
     teacher = db.relationship('Teacher', back_populates='booking')
     teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
 
