@@ -5,8 +5,6 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_sqlalchemy import SQLAlchemy
 
 from sqlalchemy.exc import IntegrityError
-# from sqlalchemy import create_engine
-# from sqlalchemy.engine import reflection
 
 
 app = Flask(__name__)
@@ -24,8 +22,6 @@ from teachers_agg.data import goals
 from teachers_agg import views, models
 from teachers_agg.models import Teacher, Goal
 
-
-# engine = create_engine(db_path)
 
 def add_teachers_to_db():
     """
@@ -62,15 +58,16 @@ def add_goals_to_db():
         db.session.rollback()
 
 
+def complete_teachers_goals_table():
+    teachers = Teacher.query.all()
+    for teacher in teachers:
+        goals = teacher.goal.split(',')
+        for item in goals:
+            goal = Goal.query.filter(Goal.goal == item).first()
+            teacher.goals.append(goal)
+        db.session.commit()
+
+
 # add_teachers_to_db()
 # add_goals_to_db()
-
-# db.drop_all()
-
-# def is_db_empty():
-#     table_names = reflection.Inspector.from_engine(engine).get_table_names()
-#     print(table_names)
-#     is_empty = table_names == []
-#     is_empty = engine.has_table('Teacher')
-
-# is_db_empty()
+# complete_teachers_goals_table()
