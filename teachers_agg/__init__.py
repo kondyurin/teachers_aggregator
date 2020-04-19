@@ -61,8 +61,8 @@ def add_goals_to_db():
         db.session.rollback()
 
 
-add_teachers_to_db()
-add_goals_to_db()
+# add_teachers_to_db()
+# add_goals_to_db()
 
 # db.drop_all()
 
