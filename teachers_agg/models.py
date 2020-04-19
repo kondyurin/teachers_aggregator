@@ -38,6 +38,7 @@ class Goal(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     goal = db.Column(db.String, nullable=False)
+    value = db.Column(db.String, nullable=False)
     teachers = db.relationship('Teacher', secondary='teachers_goals', back_populates='goals')
 
 
