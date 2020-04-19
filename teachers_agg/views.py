@@ -18,7 +18,8 @@ def main():
 @app.route("/goals/<goal>/")
 def get_goal(goal):
     teachers = Teacher.query.filter(Teacher.goal.like("%{}%".format(goal))).all()
-    return render_template("goal.html", teachers=teachers)
+    goal_value = Goal.query.filter(Goal.goal == goal).first()
+    return render_template("goal.html", teachers=teachers, goal_value=goal_value)
 
 
 @app.route("/profiles/<int:id>/")
