@@ -17,6 +17,7 @@ class Teacher(db.Model):
     picture_src = db.Column(db.String, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     free = db.Column(db.String, nullable=False)
+    goal = db.Column(db.String, nullable=False)
     booking = db.relationship('Booking', back_populates='teacher')
     goals = db.relationship('Goal', secondary='teachers_goals', back_populates='teachers')
 

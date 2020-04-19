@@ -42,6 +42,7 @@ def upgrade():
     sa.Column('picture_src', sa.String(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('free', sa.String(), nullable=False),
+    sa.Column('goal', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
