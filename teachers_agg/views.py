@@ -59,7 +59,7 @@ def booking_done():
         phone = request.form.get('clientPhone')
         day = request.form.get('clientWeekday')
         hour = request.form.get('clientTime')
-        booking_data = {'id': teacher_id, 'name':name, 'phone': phone, 'day': day, 'hour': hour}
-        with open('booking.json', 'w') as f:
-            booking_data_json = json.dump(booking_data, f)
-        return render_template("booking_done.html", booking_data=booking_data)
+        booking = Booking(name=name, phone=phone, day=day, hour=hour)
+        db.session.add(booking)
+        db.session.commit()
+        return render_template("booking_done.html", booking=booking)
