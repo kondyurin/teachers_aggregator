@@ -6,7 +6,7 @@ from sqlalchemy.sql.expression import func
 
 from .data import goals
 from teachers_agg import app, db
-from teachers_agg.models import Teacher, Booking, Goal
+from teachers_agg.models import Teacher, Booking, Goal, Request
 
 
 @app.route("/")
@@ -38,17 +38,13 @@ def request_select():
 @app.route("/request_done/", methods=['GET', 'POST'])
 def request_done():
     if request.method == 'POST':
-        request_name = request.form.get('clientNameRequest')
-        request_phone = request.form.get('clientPhoneRequest')
+        name = request.form.get('clientNameRequest')
+        phone = request.form.get('clientPhoneRequest')
         goal = request.form.get('goal')
         time = request.form.get('time')
-        request_data = {'name': request_name, 
-                        'phone':request_phone,
-                        'goal': goal,
-                        'time': time
-                        }
-        with open('request.json', 'w') as f:
-            request_data_json = json.dump(request_data, f)
+        request_data = Request(name=name, phone=phone, goal=goal, time=time)
+        db.session.add(request_data)
+        db.session.commit()
         return render_template("request_done.html", request_data=request_data)
 
 
