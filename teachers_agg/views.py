@@ -4,8 +4,8 @@ import random
 from flask import render_template, request
 from sqlalchemy.sql.expression import func
 
-from .data import goals
 from teachers_agg import app, db
+from teachers_agg.data import goals
 from teachers_agg.models import Teacher, Booking, Goal, Request
 
 
@@ -62,7 +62,8 @@ def booking_done():
         phone = request.form.get('clientPhone')
         day = request.form.get('clientWeekday')
         hour = request.form.get('clientTime')
-        booking = Booking(name=name, phone=phone, day=day, hour=hour)
+        teacher = Teacher.query.get_or_404(teacher_id)
+        booking = Booking(name=name, phone=phone, day=day, hour=hour, teacher=teacher)
         db.session.add(booking)
         db.session.commit()
         return render_template("booking_done.html", booking=booking)
