@@ -11,13 +11,16 @@ from teachers_agg.models import Teacher, Booking, Goal, Request
 
 @app.route("/")
 def main():
+    ### filter 6 random teacher
     random_profiles = Teacher.query.order_by(func.random()).limit(6).all()
     return render_template("index.html", random_profiles=random_profiles)
 
 
 @app.route("/goals/<goal>/")
 def get_goal(goal):
+    ### filter teachers by goal
     teachers = Teacher.query.filter(Teacher.goal.like("%{}%".format(goal))).all()
+    ### get goal
     goal_value = Goal.query.filter(Goal.goal == goal).first()
     return render_template("goal.html", teachers=teachers, goal_value=goal_value)
 
@@ -62,6 +65,7 @@ def booking_done():
         phone = request.form.get('clientPhone')
         day = request.form.get('clientWeekday')
         hour = request.form.get('clientTime')
+        ### one2m relationship
         teacher = Teacher.query.get_or_404(teacher_id)
         booking = Booking(name=name, phone=phone, day=day, hour=hour, teacher=teacher)
         db.session.add(booking)

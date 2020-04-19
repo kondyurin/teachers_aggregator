@@ -59,6 +59,9 @@ def add_goals_to_db():
 
 
 def complete_teachers_goals_table():
+    """
+    Complete m2m association table.
+    """
     teachers = Teacher.query.all()
     for teacher in teachers:
         goals = teacher.goal.split(',')
